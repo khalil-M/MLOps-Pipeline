@@ -30,16 +30,16 @@ model = keras.Sequential(
     ]
 )
 
-# printing summary
-fstructure = open("report/structure.txt", "w")
-model.summary(print_fn=lambda x: fstructure.write(x + '\n'))
-fstructure.close()
-
 #compiler model
 loss_fn = tf.keras.losses.mean_squared_error
 opt = keras.optimizers.Adam(learning_rate=0.01)
 model.compile(optimizer=keras.optimizers.get(opt), loss= loss_fn)
 history = model.fit(X_train, y_train, epochs=20, verbose=2)
+
+# printing summary
+fstructure = open("report/structure.txt", "w")
+model.summary(print_fn=lambda x: fstructure.write(x + '\n'))
+fstructure.close()
 
 # evaluation
 losses = history.history['loss']
@@ -52,8 +52,8 @@ plt.title('Loss per Epoch')
 plt.show()
 plt.savefig('report/history.png')
 fmetrics = open("report/metrics.txt", "w")
-fmetrics.write('Initial loss value : ', losses[0])
-fmetrics.write('Final loss value : ', losses[-1])
+fmetrics.write('Initial loss value : '+ str(losses[0]) + "\n")
+fmetrics.write('Final loss value : '+ str(losses[-1] + "\n"))
 fmetrics.close()
 
 # saving

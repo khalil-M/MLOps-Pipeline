@@ -1,0 +1,30 @@
+name: model-cml
+on: [push]
+jobs:
+  run:
+    runs-on: [ubuntu-latest]
+    container: docker://dvcorg/cml-py3:latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: cml_run
+        env:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Your ML workflow goes here
+          pip install -r requirements.txt
+          python Training.py
+          
+          echo "## Model structure" > report.md
+          echo "<pre>" >> report.md
+          cat report/structure.txt >> report.md
+          echo "</pre>" >> report.md
+          
+          echo "## Model metrics" >> report.md
+          echo "<pre>" >> report.md
+          cat report/metrics.txt >> report.md
+          echo "</pre>" >> report.md
+          
+          echo "## History" >> report.md
+          cml-publish report/history.png --md >> report.md
+          
+          cml-send-comment report.md
