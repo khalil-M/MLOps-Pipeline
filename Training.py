@@ -53,7 +53,7 @@ plt.show()
 plt.savefig('report/history.png')
 fmetrics = open("report/metrics.txt", "w")
 fmetrics.write('Initial loss value : '+ str(losses[0]) + "\n")
-fmetrics.write('Final loss value : '+ str(losses[-1] + "\n"))
+fmetrics.write('Final loss value : ' + str(losses[-1]))
 fmetrics.close()
 
 # saving
