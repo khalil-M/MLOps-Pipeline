@@ -28,3 +28,9 @@ jobs:
           cml-publish report/history.png --md >> report.md
           
           cml-send-comment report.md
+      - name: 'Upload Artifact'
+        uses: actions/upload-artifact@v2
+        with:
+          name: weights
+          path: reports/weights.h5
+          
