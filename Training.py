@@ -34,7 +34,7 @@ model = keras.Sequential(
 loss_fn = tf.keras.losses.mean_squared_error
 opt = keras.optimizers.Adam(learning_rate=0.01)
 model.compile(optimizer=keras.optimizers.get(opt), loss= loss_fn)
-history = model.fit(X_train, y_train, epochs=50, verbose=2)
+history = model.fit(X_train, y_train, epochs=100, verbose=2)
 
 # printing summary
 fstructure = open("report/structure.txt", "w")
